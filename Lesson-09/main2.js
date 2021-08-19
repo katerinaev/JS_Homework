@@ -1,45 +1,42 @@
 function Animal(name) {
-    var foodAmount = 50;
+    this._foodAmount = 50;
 
-this.dailyNorm = function(amount) {
-    if (!arguments.length) return dailyNorm = foodAmount;
-
-    if (amount < 50) {
-        throw new Error('Корма должно быть больше 50!');
-    }
-    if (amount > 500) {
-        throw new Error('Слишком много!')
-    }
-
-    dailyNorm = amount;
-}
-
-function formatFoodAmount() {
-    return dailyNorm + ' гр.';
-}
     var self = this;
+    function formatFoodAmount() {
+        return self._foodAmount + ' гр.';
+    }
+
     this.name = name;
 
-    self.feed = function() {
-        console.log('Насыпаем в миску ' + formatFoodAmount() + ' корма.');
+    this.dailyNorm = function(amount) {
+        if(!arguments.length) return formatFoodAmount();
+
+        if(amount < 50) {
+            throw new Error('Количество должно быть больше 50');
+        }
+        if (amount > 500) {
+            throw new Error('Количество должно быть меньше 500');
+        }
+        self._foodAmount = amount;
+    }
+    this.feed = function() {
+        console.log('Насыпаем в миску ' + self.dailyNorm() + ' корма.');
     };
 }
-
 function Cat(name) {
     Animal.apply(this, arguments);
 
     var animalFeed = this.feed;
-
     this.feed = function() {
         animalFeed();
         this.run();
     }
     this.run = function() {
-        console.log('Кот доволен ^_^');
+        console.log("Кот доволен ^_^");
     }
-
-}
+ }
 var barsik = new Cat('Барсик');
-barsik.dailyNorm(60);
+barsik.dailyNorm();
 
-barsik.feed();
+console.log(barsik.name);
+console.log(barsik.feed());
