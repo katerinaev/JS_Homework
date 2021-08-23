@@ -23,8 +23,6 @@ clonedObj.array.push(2);
 console.log(initialObj);
 console.log(clonedObj);
 console.log(clonedObj.object.object2.array2[1].name);
-console.log(initialObj.method());
-console.log(initialObj === clonedObj);
 
 function deepClone(initialObj) {
     var clonedObj = (Array.isArray(initialObj) ? [] : {});

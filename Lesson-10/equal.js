@@ -40,7 +40,6 @@ function deepEqual(object1, object2) {
     if (keys1.length !== keys2.length) {
         return false;
     }
-
     for (var key of keys1) {
         var val1 = object1[key];
         var val2 = object2[key];
